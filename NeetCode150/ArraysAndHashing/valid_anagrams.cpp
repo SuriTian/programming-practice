@@ -40,6 +40,21 @@ bool isAnagram(string s, string t) {
 
 }
 
+bool isAnagramBetter(string s, string t) {
+    if (s.length() != t.length()) return false;
+
+    unordered_map<char, int> tHash;
+    unordered_map<char, int> sHash;
+
+    for (int i = 0; i < s.length(); i++) {
+        tHash[t.at(i)]++;
+        sHash[s.at(i)]++;
+    }
+
+    return tHash == sHash; 
+
+}
+
 int main () {
 
 }
