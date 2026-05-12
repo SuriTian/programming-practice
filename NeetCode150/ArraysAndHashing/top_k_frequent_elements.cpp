@@ -35,7 +35,47 @@ vector<int> topKFrequent(vector<int>& nums, int k) {
 
     return acc_result;
 
-    
-    
+}
+
+
+/**
+ * Use the bucket sort algorithm to create n buckets, grouping numbers based on their frequencies from 1 to n. 
+ * Then, pick the top k numbers from the buckets, starting from n down to 1.
+ */
+vector<int> topKFrequentWBucketSort(vector<int>& nums, int k) {
+    // Build a frequency map that counts how many times each number appears.
+    map<int, int> freqMap; // num, freq
+    for (int i = 0; i < nums.size(); i++) {
+        freqMap[nums.at(i)]++; 
+    }
+
+    // Create a list of groups freq, where freq[i] will store all numbers that appear exactly i times.
+    vector<vector<int>> freq(nums.size() + 1); // remember that frequency can be num.size(), so we need one more so the last index lands on that 
+
+    // For each number and its frequency in the map, add the number to freq[frequency].
+    for (auto& pair : freqMap) {
+        freq[pair.second].push_back(pair.first); 
+    }
+
+    // Initialize an empty result list.
+    vector<int> result;
+
+    int count = 0; 
+    int index = freq.size() - 1; 
+
+    while (count < k) {
+        for (int i = 0; i < freq[index].size(); i++) {
+            if (count >= k) {
+                return result;
+            }
+
+            result.push_back(freq[index][i]);
+            count++;
+        }
+
+        index--;
+    }
+
+    return result; 
 
 }
