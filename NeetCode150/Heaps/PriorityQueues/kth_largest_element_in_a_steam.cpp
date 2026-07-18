@@ -1,5 +1,7 @@
-#include <priority_queue>
+#include <queue>
 #include <vector>
+
+using namespace std;
 
 class KthLargest {
 private:
